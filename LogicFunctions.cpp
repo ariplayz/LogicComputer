@@ -42,7 +42,6 @@ namespace LogicFunctions {
         return out;
     }
 
-    struct ab{bool a; bool b;};
     ab make_bools(bool a, bool b) {
         return {a, b};
     }
@@ -53,34 +52,6 @@ namespace LogicFunctions {
         ab out = make_bools(a, b);
         return out;
     }
-
-    struct Bool16 {
-        uint16_t bits = 0;
-
-        bool operator[](unsigned n) const {
-            if (n >= 16) throw std::out_of_range("index");
-            return (bits >> n) & 1u;
-        }
-
-        struct Proxy {
-            uint16_t &bits;
-            unsigned n;
-            operator bool() const { return (bits >> n) & 1u; }
-            Proxy& operator=(bool v) {
-                if (v) bits |= (uint16_t(1u) << n);
-                else   bits &= uint16_t(~(uint16_t(1u) << n));
-                return *this;
-            }
-        };
-
-        Proxy operator[](unsigned n) {
-            if (n >= 16) throw std::out_of_range("index");
-            return Proxy{bits, n};
-        }
-
-        void set(unsigned n, bool v) { (*this)[n] = v; }
-        bool get(unsigned n) const { return (*this)[n]; }
-    };
 
     Bool16 NOT16(Bool16 in) {
         Bool16 out;

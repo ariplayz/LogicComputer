@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
-#include "LogicFunctions"
+#include "LogicFunctions.h"
 using namespace std;
 int main() {
-return 0;
+    return 0;
 }
